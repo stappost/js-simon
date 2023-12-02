@@ -31,7 +31,7 @@ for(let i = 0; i<5; i++){
 
 setTimeout(function(){
     document.getElementById("list_number").classList.add("d-none")
-}, 3000)
+}, 30000)
 // dopo 32 secondi richiedere all'utente, con 5 promp, i numeri visualizzati;
 setTimeout(function(){
     // inizializzare variabile dei numeri indovinati;
@@ -53,7 +53,7 @@ setTimeout(function(){
     //  stampare array right;
     console.log(guessed);
     console.log(`hai indovinato i seguenti numeri: ${right}`);
-}, 3200)
+}, 32000)
 
 
 
