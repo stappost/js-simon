@@ -42,6 +42,36 @@ function num_to_memorize(){
     for(let i = 0; i< quantity; i++){
         list(num[i])
     }
+    setTimeout(function(){
+        document.getElementById("list_number").classList.add("d-none")
+    }, 3000)
+    // dopo 32 secondi richiedere all'utente, con 5 promp, i numeri visualizzati;
+    setTimeout(function(){
+        // inizializzare variabile dei numeri indovinati;
+        let guessed = 0;
+        // inizializzare array right;
+        let user_number = [];
+        let right = [];
+        let number;
+       while(user_number.length < quantity){
+            number = parseInt(prompt("inserire un numero tra i visualizzati"));
+            if(number<=0||number>0){
+                user_number.push(number);
+            }
+            // ? il numero inserito è presente nell'array
+            //  incrementare variabile indovinati;
+            //  aggiungere il numero all'interno dell'array right;
+            if(num.includes(number)){
+                right.push(number);
+                guessed++;
+            }
+        } 
+        // stampare variabile numeri indovinate;
+        //  stampare array right;
+        console.log (num_random(quantity));
+        console.log(guessed);
+        console.log(`hai indovinato i seguenti numeri: ${right}`);
+    }, 3200)
     return quantity
 }
 
@@ -53,31 +83,7 @@ btn_play.addEventListener("click", function(){
     
     // dopo 30 secondi far scomparire i numeri;
 
-    setTimeout(function(){
-        document.getElementById("list_number").classList.add("d-none")
-    }, 3000)
-    // dopo 32 secondi richiedere all'utente, con 5 promp, i numeri visualizzati;
-    setTimeout(function(){
-        // inizializzare variabile dei numeri indovinati;
-        let guessed = 0;
-        // inizializzare array right;
-        let right = [];
-        let number;
-        for(let i = 0 ; i < quantity ; i++){
-            number = parseInt(prompt("inserire un numero tra i visualizzati"));
-            // ? il numero inserito è presente nell'array
-            //  incrementare variabile indovinati;
-            //  aggiungere il numero all'interno dell'array right;
-            if(num_random(quantity).includes(number)){
-                right.push(number);
-                guessed++;
-            }
-        } 
-        // stampare variabile numeri indovinate;
-        //  stampare array right;
-        console.log(guessed);
-        console.log(`hai indovinato i seguenti numeri: ${right}`);
-    }, 3200)
+ 
 })
 
 
