@@ -40,6 +40,7 @@ function num_to_memorize(){
             return;    
     }
     let num = num_random(quantity)
+
     for(let i = 0; i< quantity; i++){
         list(num[i], "list_number")
     }
@@ -88,6 +89,8 @@ function num_to_memorize(){
 const btn_play = document.getElementById("play")
 
 btn_play.addEventListener("click", function(){
+    document.getElementById("list_number").innerHTML = " "
+    document.querySelector("#text_reset > ul").innerHTML = " "
     document.getElementById("list_number").classList.remove("d-none")
     document.getElementById("text_reset").classList.add("d-none")
     let quantity = num_to_memorize();
