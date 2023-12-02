@@ -14,9 +14,9 @@ function num_random(quantity){
 
 
 // permettere di visualizzare i numeri a schermo;
-function list(num){
+function list(num, ul_id){
 
-    let ul = document.getElementById("list_number");
+    let ul = document.getElementById(ul_id);
     let li = document.createElement("li");
     li.innerText = num;
     ul.appendChild(li);
@@ -36,12 +36,14 @@ function num_to_memorize(){
             quantity = 15;
             break;
         default:
+            prompt = " selezionare il livello di difficoltà"
             return;    
     }
     let num = num_random(quantity)
     for(let i = 0; i< quantity; i++){
-        list(num[i])
+        list(num[i], "list_number")
     }
+    // dopo 30 secondi far scomparire i numeri;
     setTimeout(function(){
         document.getElementById("list_number").classList.add("d-none")
     }, 3000)
@@ -69,8 +71,15 @@ function num_to_memorize(){
         // stampare variabile numeri indovinate;
         //  stampare array right;
         console.log (num_random(quantity));
-        console.log(guessed);
+        document.getElementById("text_reset").classList.remove("d-none")
+        let congrat = document.getElementById("congrat");
+        congrat.innerText = `COMPLIMENTI hai indovinato ${guessed} numeri nel ${level}° livello. 
+        Hai indovinato i seguenti numeri:`;
         console.log(`hai indovinato i seguenti numeri: ${right}`);
+        for(let i = 0 ; i<right.length ; i++){
+            list(right[i], "number_guessed")
+        }
+
     }, 3200)
     return quantity
 }
@@ -79,11 +88,9 @@ function num_to_memorize(){
 const btn_play = document.getElementById("play")
 
 btn_play.addEventListener("click", function(){
+    document.getElementById("list_number").classList.remove("d-none")
+    document.getElementById("text_reset").classList.add("d-none")
     let quantity = num_to_memorize();
-    
-    // dopo 30 secondi far scomparire i numeri;
-
- 
 })
 
 
