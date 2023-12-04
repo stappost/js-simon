@@ -22,23 +22,9 @@ function list(num, ul_id){
     ul.appendChild(li);
 }
 
-function num_to_memorize(){
-    let level = document.getElementById("difficulty").value;
-    let quantity
-    switch(level){
-        case "1":
-            quantity = 5;
-            break;
-        case "2":
-            quantity = 10;
-            break;
-        case "3":
-            quantity = 15;
-            break;
-        default:
-            prompt = " selezionare il livello di difficoltà"
-            return;    
-    }
+// FUNZIONE PRIMCIPALE CHE IMMETTE LA LISTA, CONTROLLA E DA FEEDBACK FINALE 
+function num_to_memorize(timer, quantity){
+   
     let num = num_random(quantity)
 
     for(let i = 0; i< quantity; i++){
@@ -47,9 +33,12 @@ function num_to_memorize(){
     // dopo 30 secondi far scomparire i numeri;
     setTimeout(function(){
         document.getElementById("list_number").classList.add("d-none")
-    }, 3000)
+    }, timer)
     // dopo 32 secondi richiedere all'utente, con 5 promp, i numeri visualizzati;
     setTimeout(function(){
+        if(timer == 600){
+            alert("io lo avevo detto che era impossibile");
+        }
         // inizializzare variabile dei numeri indovinati;
         let guessed = 0;
         // inizializzare array right;
@@ -74,26 +63,58 @@ function num_to_memorize(){
         console.log (num_random(quantity));
         document.getElementById("text_reset").classList.remove("d-none")
         let congrat = document.getElementById("congrat");
-        congrat.innerText = `COMPLIMENTI hai indovinato ${guessed} numeri nel ${level}° livello. 
+        congrat.innerText = `COMPLIMENTI hai indovinato ${guessed} numeri. 
         Hai indovinato i seguenti numeri:`;
         console.log(`hai indovinato i seguenti numeri: ${right}`);
         for(let i = 0 ; i<right.length ; i++){
             list(right[i], "number_guessed")
         }
 
-    }, 3200)
+    }, timer+1000)
     return quantity
+}
+
+// FUNZIONE CHE CAMBIA IL TEMPO IN BASE AL LIVELLO 
+function select_level(){
+    let level = document.getElementById("difficulty").value;
+    let time;
+    switch(level){
+        case "1":
+            quantity = 5;
+            time = 30000;
+            break;
+        case "2":
+            quantity = 10;
+            time = 20000;
+            break;
+        case "3":
+            quantity = 15;
+            time = 10000;
+            break;
+        case "4":
+            quantity = 10;
+            time = 600;
+            break;
+        default:
+            prompt = " selezionare il livello di difficoltà"
+            return;    
+    }
+    console.log(time)
+    num_to_memorize(time, quantity)
 }
 
 
 const btn_play = document.getElementById("play")
 
 btn_play.addEventListener("click", function(){
+
     document.getElementById("list_number").innerHTML = " "
     document.querySelector("#text_reset > ul").innerHTML = " "
     document.getElementById("list_number").classList.remove("d-none")
     document.getElementById("text_reset").classList.add("d-none")
-    let quantity = num_to_memorize();
+
+    
+    select_level();
 })
 
 
